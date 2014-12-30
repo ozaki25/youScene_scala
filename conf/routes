@@ -1,0 +1,12 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /youScene/blogs                  controllers.BlogsController.index
+GET     /youScene                        controllers.BlogsController.index
+GET     /                                controllers.BlogsController.index
+GET     /youScene/blogs/new           controllers.BlogsController.create
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
