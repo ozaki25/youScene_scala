@@ -2,16 +2,43 @@ package controllers
 
 import play.api._
 import play.api.mvc._
+import play.api.data._
+import play.api.data.Forms._
 
-import views.html._
+import models._
+import views._
 
 object BlogsController extends Controller {
-  
+  val blogForm = Form(
+    tuple(
+      "title" -> nonEmptyText,
+      "body" ->  nonEmptyText
+    )
+  )
+
   def index = Action {
-    Ok(blogs.index("Your new application is ready."))
+    val blogs = Blogs.all()
+    Ok(html.blogs.index(blogs))
   }
   
-  def create = Action {
-    Ok(blogs.create("new blogs"))
+  def show(id: Long) = Action {
+    val blog = Blogs.findById(id)
+    Ok(html.blogs.show(blog))
+  }
+
+  def newBlog = Action {
+    Ok(html.blogs.newBlog(blogForm))
+  }
+
+  def create = Action { implicit request =>
+    blogForm.bindFromRequest.fold(
+      errors => {
+        BadRequest(html.blogs.newBlog(errors))
+      },
+      form => {
+        Blogs.create(form)
+        Redirect(routes.BlogsController.show(1))
+      }
+    )
   }
 }

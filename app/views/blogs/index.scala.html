@@ -1,7 +1,18 @@
-@(message: String)
+@(blogs: List[Blogs])
 
-@main("Welcome to Play 2.1") {
-    
-    @play20.welcome(message)
-    
+@main("記事一覧") {
+  <div class="row">
+    <div class="col-md-9 index-blogs">
+      @for(blog <- blogs) {
+        <div class="index-blog">
+	  <div class="index-title"><a href="@routes.BlogsController.show(blog.id)">@blog.title</a></div>
+	  <div class="index-blog-info row">
+	    <span class="col-md-date">@blog.updatedDate</span>
+	  </div>
+	</div>
+      }
+    </div>	
+    <div class="col-md-3">
+    </div>
+  </div>
 }

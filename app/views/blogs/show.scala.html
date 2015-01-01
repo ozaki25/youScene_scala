@@ -1,0 +1,20 @@
+@(blog: Blogs)
+
+@main(blog.title) {
+  <div class="row">
+    <div class="col-md-9 show-blog">
+      <div class="show-header">
+	<div class="show-title">@blog.title</div>
+      </div>
+      <pre class="show-article">@Html(blog.body)</pre>
+      <div class="show-footer">
+	<div class="operate-blog-btn">
+	  <a class="btn btn-sm btn-youScene" href="#">編集</a>
+	  <a class="btn btn-sm btn-youScene" href="#" onclick="return window.confirm('削除します。よろしいですか?')">削除</a>
+	</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+}
