@@ -1,0 +1,25 @@
+@(user: Users, form: Form[(String, String, String)])
+
+@main("新規登録")(user) {
+  @helper.form(routes.AuthController.signup, 'class -> "form-group") {
+    @helper.inputText(
+      form("username"),
+      '_label -> "ユーザID",
+      'class -> "form-control input-sm",
+      '_help -> ""
+    )
+    @helper.inputText(
+      form("name"),
+      '_label -> "名前",
+      'class -> "form-control input-sm",
+      '_help -> ""
+    )
+    @helper.inputText(
+      form("sectionName"),
+      '_label -> "部署名",
+      'class -> "form-control input-sm",
+      '_help -> ""
+    )
+    <input type="submit" class="btn btn-youScene" value="登録">
+  }
+}

@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)(user: Users)(content: Html)
 
 <!DOCTYPE html>
 
@@ -12,7 +12,7 @@
     <script src="@routes.Assets.at("bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
   </head>
   <body>
-    @header()
+    @header(user)
     <div id="container" class="container">
       @content
     </div>

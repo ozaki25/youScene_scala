@@ -1,6 +1,6 @@
-@(blog: Blogs)
+@(user: Users, blog: Blogs)
 
-@main(blog.title) {
+@main(blog.title)(user) {
   <div class="row">
     <div class="col-md-9 show-blog">
       <div class="show-header">
