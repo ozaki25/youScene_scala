@@ -41,4 +41,21 @@ object BlogsController extends Controller {
       }
     )
   }
+
+  def edit(id: Long) = Action {
+    val blog = Blogs.findById(id)
+    Ok(html.blogs.edit(id, blogForm.fill(blog.title,blog.body)))
+  }
+
+  def update(id: Long) = Action { implicit request =>
+    blogForm.bindFromRequest.fold(
+      error => {
+        BadRequest(html.blogs.edit(id, error))
+      },
+      form => {
+        Blogs.update(form, id)
+        Redirect(routes.BlogsController.show(id))
+      }
+    )
+  }
 }

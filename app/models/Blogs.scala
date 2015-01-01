@@ -48,4 +48,12 @@ object Blogs {
       ).executeUpdate()
     }
   }
+
+  def update(form: (String,String), id: Long) {
+    DB.withConnection { implicit connection =>
+      SQL("update blogs set title = {title}, body = {body} where id = {id}").on(
+        'title -> form._1, 'body -> form._2, 'id -> id
+      ).executeUpdate()
+    }
+  }
 }

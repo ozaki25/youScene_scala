@@ -9,6 +9,8 @@ GET     /                                controllers.BlogsController.index
 POST    /youScene/blogs                  controllers.BlogsController.create
 GET     /youScene/blogs/new              controllers.BlogsController.newBlog
 GET     /youScene/blogs/:id              controllers.BlogsController.show(id: Long)
+POST    /youScene/blogs/:id              controllers.BlogsController.update(id: Long)
+GET     /youScene/blogs/:id/edit         controllers.BlogsController.edit(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file                    controllers.Assets.at(path="/public", file)
