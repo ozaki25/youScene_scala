@@ -1,6 +1,6 @@
-@(user: Users, form: Form[(String, String, String)])
+@(form: Form[(String, String, String)])
 
-@main("新規登録")(user) {
+@main("新規登録") {
   @helper.form(routes.AuthController.signup, 'class -> "form-group") {
     @helper.inputText(
       form("username"),

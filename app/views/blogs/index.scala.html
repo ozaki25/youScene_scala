@@ -1,6 +1,6 @@
-@(user: Users, blogs: List[Blogs])
+@(blogs: List[Blogs])
 
-@main("記事一覧")(user) {
+@main("記事一覧") {
   <div class="row">
     <div class="col-md-9 index-blogs">
       @for(blog <- blogs) {

@@ -1,6 +1,6 @@
-@(user: Users, blogForm: Form[(String, String)])
+@(blogForm: Form[(String, String)])
 
-@main("新規作成")(user) {
+@main("新規作成") {
   @helper.form(action = routes.BlogsController.create, 'class -> "form-group") {
     <div class="label-title">
       <label>

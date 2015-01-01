@@ -1,6 +1,6 @@
-@(user: Users, id: Long, blogForm: Form[(String, String)])
+@(id: Long, blogForm: Form[(String, String)])
 
-@main("記事編集")(user) {
+@main("記事編集") {
   @helper.form(action = routes.BlogsController.update(id), 'class -> "form-group") {
     <div class="label-title">
       <label>

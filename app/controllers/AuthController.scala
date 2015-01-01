@@ -24,16 +24,14 @@ object AuthController extends Controller {
     )
   )
 
-  def entry = Action { request =>
-    val user = currentUser(request)
-    Ok(html.auth.entry(user, signupForm))
+  def entry = Action {
+    Ok(html.auth.entry(signupForm))
   }
   
   def signup = Action { implicit request =>
-    val user = currentUser(request)
     signupForm.bindFromRequest.fold(
       errors => {
-        BadRequest(html.auth.entry(user, errors))
+        BadRequest(html.auth.entry(errors))
       },
       form => {
         Users.create(form)
@@ -42,16 +40,14 @@ object AuthController extends Controller {
     )
   }
 
-  def signin = Action { request =>
-    val user = currentUser(request)
-    Ok(html.auth.signin(user, signinForm))
+  def signin = Action {
+    Ok(html.auth.signin(signinForm))
   }
 
   def authenticate = Action { implicit request =>
-    val user = currentUser(request)
     signinForm.bindFromRequest.fold(
       errors => {
-        BadRequest(html.auth.signin(user, errors))
+        BadRequest(html.auth.signin(errors))
       },
       form => {
         val user = Users.findByUsername(form._1)
@@ -68,7 +64,4 @@ object AuthController extends Controller {
   def logout = Action {
     Redirect(routes.AuthController.signin).withNewSession
   }
-
-  def currentUser(request: RequestHeader) = Users.findByUsername(username(request))
-  def username(request: RequestHeader) = request.session.get("username")
 }

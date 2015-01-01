@@ -18,14 +18,14 @@ object Users {
     get[Long]("users.id") ~
     get[String]("users.username") ~
     get[String]("users.name") ~
-    get[String]("users.section_name") map {
+    get[String]("users.sectionName") map {
       case id~username~name~sectionName => Users(
          id, username, name, sectionName
       )
     }
   }
 
-  def findByUsername(username: Option[String]): Users = {
+  def findByUsername(username: String): Users = {
     DB.withConnection { implicit connection =>
       SQL("select * from users where username = {username}").on(
         'username -> username

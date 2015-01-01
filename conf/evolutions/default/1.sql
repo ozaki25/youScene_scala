@@ -14,10 +14,10 @@ create table blogs (
 ;
 
 create table users (
-  id                        bigint not null AUTO_INCREMEN,
+  id                        bigint not null AUTO_INCREMENT,
   username                  varchar(255),
   name                      varchar(255),
-  section_name              varchar(255),
+  sectionname              varchar(255),
   constraint pk_users primary key (id))
 ;
 

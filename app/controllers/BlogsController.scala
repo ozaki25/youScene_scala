@@ -8,7 +8,7 @@ import play.api.data.Forms._
 import models._
 import views._
 
-object BlogsController extends YouScene {
+object BlogsController extends Controller {
   val blogForm = Form(
     tuple(
       "title" -> nonEmptyText,
@@ -17,27 +17,23 @@ object BlogsController extends YouScene {
   )
 
   def index = Action {
-    val user = currentUser()
     val blogs = Blogs.all()
-    Ok(html.blogs.index(user, blogs))
+    Ok(html.blogs.index(blogs))
   }
   
   def show(id: Long) = Action {
-    val user =  currentUser()
     val blog = Blogs.findById(id)
-    Ok(html.blogs.show(user, blog))
+    Ok(html.blogs.show(blog))
   }
 
   def newBlog = Action {
-    val user =  currentUser()
-    Ok(html.blogs.newBlog(user, blogForm))
+    Ok(html.blogs.newBlog(blogForm))
   }
 
   def create = Action { implicit request =>
-    val user = currentUser()
     blogForm.bindFromRequest.fold(
       errors => {
-        BadRequest(html.blogs.newBlog(user, errors))
+        BadRequest(html.blogs.newBlog(errors))
       },
       form => {
         Blogs.create(form)
@@ -47,16 +43,14 @@ object BlogsController extends YouScene {
   }
 
   def edit(id: Long) = Action {
-    val user = currentUser()
     val blog = Blogs.findById(id)
-    Ok(html.blogs.edit(user, id, blogForm.fill(blog.title,blog.body)))
+    Ok(html.blogs.edit(id, blogForm.fill(blog.title,blog.body)))
   }
 
   def update(id: Long) = Action { implicit request =>
-    val user = currentUser()
     blogForm.bindFromRequest.fold(
       error => {
-        BadRequest(html.blogs.edit(user, id, error))
+        BadRequest(html.blogs.edit(id, error))
       },
       form => {
         Blogs.update(form, id)
